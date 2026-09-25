@@ -1,8 +1,12 @@
 # 🔐 PASS-FORGE
 
 A secure and customizable password generator built with **Python, Flask, HTML, CSS, and JavaScript**.
-
 PASS-FORGE allows users to generate strong passwords by customizing password length and character types.
+
+
+## 🚀 Live Demo
+[Live Demo](https://pass-forge.onrender.com)
+
 
 ## ✨ Features
 
