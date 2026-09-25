@@ -1,45 +1,15 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, session
 import secrets
 import string
-import json
 import os
-
 
 app = Flask(__name__)
 
-DATA_FILE = "password.json"
-
-# SANDHU
-# ---------------------------------------
-# LOAD PASSWORD HISTORY
-# ---------------------------------------
-
-def load_history():
-
-    if not os.path.exists(DATA_FILE):
-        return []
-
-    try:
-        with open(DATA_FILE, "r", encoding="utf-8") as file:
-            return json.load(file)
-
-    except (json.JSONDecodeError, OSError):
-        return []
-# SANDHU
-
-# ---------------------------------------
-# SAVE PASSWORD HISTORY
-# ---------------------------------------
-
-def save_history(history):
-
-    with open(DATA_FILE, "w", encoding="utf-8") as file:
-
-        json.dump(
-            history,
-            file,
-            indent=4
-        )
+# Session security key
+app.secret_key = os.environ.get(
+    "SECRET_KEY",
+    "pass-forge-demo-secret-key"
+)
 
 
 # ---------------------------------------
@@ -60,9 +30,7 @@ def generate_password(
     symbols = "!@#$%^&*()_+-=[]{}|;:,.<>?"
 
     selected = ""
-
     required = []
-
 
     # Select character groups
 
@@ -70,53 +38,42 @@ def generate_password(
         selected += uppercase
         required.append(secrets.choice(uppercase))
 
-
     if use_lowercase:
         selected += lowercase
         required.append(secrets.choice(lowercase))
 
-# ANMOL SANHDU
     if use_numbers:
         selected += numbers
         required.append(secrets.choice(numbers))
-
 
     if use_symbols:
         selected += symbols
         required.append(secrets.choice(symbols))
 
-
     # Nothing selected
 
     if not selected:
-
         raise ValueError(
             "Select at least one character type."
         )
 
-
     # Length check
 
     if length < len(required):
-
         raise ValueError(
             "Password length is too short for the selected options."
         )
 
-
     # Fill remaining characters
 
     while len(required) < length:
-
         required.append(
             secrets.choice(selected)
         )
 
-
     # Secure shuffle
 
     secrets.SystemRandom().shuffle(required)
-
 
     return "".join(required)
 
@@ -128,7 +85,6 @@ def generate_password(
 def check_strength(password):
 
     score = 0
-
 
     if len(password) >= 8:
         score += 1
@@ -151,14 +107,12 @@ def check_strength(password):
     if any(not char.isalnum() for char in password):
         score += 1
 
-
     if score <= 2:
 
         return {
             "level": "Weak",
             "percentage": 30
         }
-# ALL LOVE ANMOL SANDHUH
 
     elif score <= 4:
 
@@ -166,7 +120,6 @@ def check_strength(password):
             "level": "Medium",
             "percentage": 60
         }
-
 
     else:
 
@@ -194,11 +147,12 @@ def home():
 def generate():
 
     data = request.get_json()
-# SANDHU
 
     try:
 
-        length = int(data.get("length", 16))
+        length = int(
+            data.get("length", 16)
+        )
 
         use_uppercase = bool(
             data.get("uppercase", True)
@@ -216,7 +170,6 @@ def generate():
             data.get("symbols", True)
         )
 
-
         # Keep allowed range
 
         if length < 4 or length > 30:
@@ -227,7 +180,6 @@ def generate():
                     "Password length must be between 4 and 30."
             }), 400
 
-
         password = generate_password(
             length,
             use_uppercase,
@@ -236,23 +188,25 @@ def generate():
             use_symbols
         )
 
-
         strength = check_strength(password)
 
+        # ---------------------------------------
+        # PER-USER SESSION COUNTER
+        # ---------------------------------------
 
-        # Save history
+        current_count = session.get(
+            "total_generated",
+            0
+        )
 
-        history = load_history()
+        session["total_generated"] = (
+            current_count + 1
+        )
 
-        history.append({
-            "length": len(password),
-            "strength": strength["level"]
-        })
+        session["last_length"] = len(password)
 
+        session["last_strength"] = strength["level"]
 
-        save_history(history)
-
-# SANDHU
         return jsonify({
 
             "success": True,
@@ -265,7 +219,6 @@ def generate():
                 strength["percentage"]
 
         })
-
 
     except ValueError as error:
 
@@ -285,25 +238,35 @@ def generate():
 @app.route("/stats")
 def stats():
 
-    history = load_history()
+    total_generated = session.get(
+        "total_generated",
+        0
+    )
 
+    last_length = session.get(
+        "last_length",
+        0
+    )
+
+    last_strength = session.get(
+        "last_strength",
+        "None"
+    )
 
     return jsonify({
 
         "total_generated":
-            len(history),
+            total_generated,
 
         "last_length":
-            history[-1]["length"]
-            if history else 0,
+            last_length,
 
         "last_strength":
-            history[-1]["strength"]
-            if history else "None"
+            last_strength
 
     })
 
-# SANDHU
+
 # ---------------------------------------
 # RUN SERVER
 # ---------------------------------------
@@ -313,5 +276,3 @@ if __name__ == "__main__":
     app.run(
         debug=True
     )
-
-
