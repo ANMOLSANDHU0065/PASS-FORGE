@@ -5,7 +5,7 @@ PASS-FORGE allows users to generate strong passwords by customizing password len
 
 
 ## 🚀 Live Demo
-[**Open PASS-FORGE**](https://pass-forge.onrender.com)
+[**PASS-FORGE**](https://pass-forge.onrender.com)
 
 
 ## ✨ Features
