@@ -1,0 +1,2011 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<!-- SANDHU -->
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>PASS FORGE | Password Generator</title>
+
+
+    <style>
+/* SANDHU */
+        :root {
+
+            --bg: #f4fbff;
+
+            --card: #ffffff;
+
+            --text: #172033;
+
+            --muted: #718096;
+
+            --primary: #3aaee8;
+
+            --primary-dark: #168dca;
+
+            --sky-light: #e3f6ff;
+
+            --peach: #ffe0d0;
+
+            --border: #dcecf4;
+
+            --input: #f8fcff;
+
+            --success: #22c55e;
+
+            --warning: #f59e0b;
+
+            --danger: #ef4444;
+
+            --shadow:
+                0 15px 40px rgba(43, 145, 190, 0.10);
+
+        }
+
+
+        body.dark {
+
+            --bg: #0f1821;
+
+            --card: #17232e;
+
+            --text: #f3f8fc;
+
+            --muted: #9cacbb;
+
+            --primary: #4bbaf0;
+
+            --primary-dark: #25a0d8;
+
+            --sky-light: #193b4b;
+
+            --peach: #4a342c;
+
+            --border: #293c4c;
+
+            --input: #101a24;
+
+            --shadow:
+                0 15px 40px rgba(0, 0, 0, 0.25);
+
+        }
+
+
+        /* =====================================
+           RESET
+        ====================================== */
+
+        * {
+
+            margin: 0;
+
+            padding: 0;
+
+            box-sizing: border-box;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+        }
+
+
+        body {
+
+            min-height: 100vh;
+
+            background: var(--bg);
+
+            color: var(--text);
+
+            transition:
+                background 0.3s,
+                color 0.3s;
+
+        }
+
+/* SANDHU */
+        button {
+
+            border: none;
+
+            cursor: pointer;
+
+        }
+
+
+        /* =====================================
+           HEADER
+        ====================================== */
+
+        header {
+
+            height: 72px;
+
+            padding: 0 7%;
+
+            background: var(--card);
+
+            border-bottom:
+                1px solid var(--border);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 100;
+
+        }
+
+
+        .brand {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+        }
+
+
+        .brand-logo {
+
+            width: 43px;
+
+            height: 43px;
+
+            border-radius: 13px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 22px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #56c5f3,
+                    #ffd4c0
+                );
+
+        }
+
+/* SANDHU */
+        .brand-name {
+
+            font-size: 19px;
+
+            font-weight: 700;
+
+        }
+
+
+        .brand-name span {
+
+            color: var(--primary-dark);
+
+        }
+
+
+        .theme-btn {
+
+            width: 42px;
+
+            height: 42px;
+
+            border-radius: 50%;
+
+            background: var(--peach);
+
+            color: var(--text);
+
+            font-size: 18px;
+
+            transition: 0.2s;
+
+        }
+
+
+        .theme-btn:hover {
+
+            transform:
+                rotate(15deg)
+                scale(1.05);
+
+        }
+
+
+        /* =====================================
+           HERO
+        ====================================== */
+
+        .hero {
+
+            text-align: center;
+
+            padding:
+                55px
+                20px
+                35px;
+
+        }
+
+
+        .badge {
+
+            display: inline-block;
+
+            padding:
+                8px
+                15px;
+
+            border-radius: 30px;
+
+            background: var(--sky-light);
+
+            color: var(--primary-dark);
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            margin-bottom: 17px;
+
+        }
+
+/* SANDHU */
+        .hero h1 {
+
+            font-size:
+                clamp(
+                    31px,
+                    5vw,
+                    50px
+                );
+
+            line-height: 1.15;
+
+            margin-bottom: 13px;
+
+        }
+
+
+        .hero h1 span {
+
+            color: var(--primary-dark);
+
+        }
+
+
+        .hero p {
+
+            max-width: 650px;
+
+            margin: auto;
+
+            color: var(--muted);
+
+            line-height: 1.7;
+
+        }
+
+
+        /* =====================================
+           DASHBOARD
+        ====================================== */
+
+        .dashboard {
+
+            width: 88%;
+
+            max-width: 1120px;
+
+            margin:
+                10px
+                auto
+                65px;
+
+        }
+
+
+        .grid {
+
+            display: grid;
+
+            grid-template-columns:
+                1.4fr
+                0.8fr;
+
+            gap: 22px;
+
+        }
+
+/* SANDHU */
+        .card {
+
+            background: var(--card);
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 22px;
+
+            padding: 28px;
+
+            box-shadow: var(--shadow);
+
+            transition:
+                background 0.3s,
+                border 0.3s;
+
+        }
+
+
+        .card-header {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            margin-bottom: 22px;
+
+        }
+
+
+        .card-header h2 {
+
+            font-size: 19px;
+
+        }
+
+
+        .card-header span {
+
+            color: var(--muted);
+
+            font-size: 13px;
+
+        }
+
+
+        /* =====================================
+           PASSWORD DISPLAY
+        ====================================== */
+
+        .password-box {
+
+            display: flex;
+
+            align-items: center;
+
+            padding: 5px;
+
+            background: var(--input);
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 14px;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .password-box input {
+
+            flex: 1;
+
+            min-width: 0;
+
+            padding:
+                15px
+                12px;
+
+            border: none;
+
+            outline: none;
+
+            background: transparent;
+
+            color: var(--text);
+
+            font-size: 16px;
+
+            font-weight: 700;
+
+        }
+
+/* SANDHU */
+        .copy-btn {
+
+            padding:
+                12px
+                17px;
+
+            border-radius: 10px;
+
+            background: var(--primary);
+
+            color: white;
+
+            font-weight: 700;
+
+            transition: 0.2s;
+
+        }
+
+
+        .copy-btn:hover {
+
+            background:
+                var(--primary-dark);
+
+        }
+
+
+        /* =====================================
+           LENGTH
+        ====================================== */
+
+        .length-info {
+
+            display: flex;
+
+            justify-content:
+                space-between;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .length-info span:first-child {
+
+            color: var(--muted);
+
+        }
+
+
+        .length-value {
+
+            color:
+                var(--primary-dark);
+
+            font-weight: 700;
+
+        }
+
+
+        input[type="range"] {
+
+            width: 100%;
+
+            accent-color:
+                var(--primary);
+
+            cursor: pointer;
+
+            margin-bottom: 27px;
+
+        }
+/* SANDHU */
+
+        /* =====================================
+           CUSTOMIZE
+        ====================================== */
+
+        .custom-title {
+
+            margin-bottom: 13px;
+
+        }
+
+
+        .custom-subtitle {
+
+            color: var(--muted);
+
+            font-size: 13px;
+
+            margin-bottom: 17px;
+
+        }
+
+
+        .options {
+
+            display: grid;
+
+            grid-template-columns:
+                1fr
+                1fr;
+
+            gap: 11px;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .option {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 9px;
+
+            padding: 13px;
+
+            background: var(--input);
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 12px;
+
+            color: var(--text);
+
+            font-size: 14px;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+
+        }
+
+
+        .option:hover {
+
+            border-color:
+                var(--primary);
+
+        }
+
+
+        .option input {
+
+            width: 16px;
+
+            height: 16px;
+
+            accent-color:
+                var(--primary);
+
+        }
+
+
+        /* =====================================
+           GENERATE BUTTON
+        ====================================== */
+/* SANDHU */
+        .generate-btn {
+
+            width: 100%;
+
+            padding: 15px;
+
+            border-radius: 12px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #43b8ed,
+                    #1e9bd4
+                );
+
+            color: white;
+
+            font-size: 15px;
+
+            font-weight: 700;
+
+            transition: 0.2s;
+
+        }
+
+
+        .generate-btn:hover {
+
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                0 8px 22px
+                rgba(
+                    30,
+                    155,
+                    212,
+                    0.25
+                );
+
+        }
+
+
+        /* =====================================
+           STRENGTH CARD
+        ====================================== */
+
+        .strength-card {
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+
+        }
+
+
+        .shield {
+
+            width: 58px;
+
+            height: 58px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 17px;
+
+            background: var(--sky-light);
+
+            font-size: 26px;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .strength-card h2 {
+
+            font-size: 20px;
+
+            margin-bottom: 9px;
+
+        }
+
+
+        .strength-card p {
+
+            color: var(--muted);
+
+            font-size: 14px;
+
+            line-height: 1.6;
+
+            margin-bottom: 24px;
+
+        }
+
+
+        .strength-bar {
+
+            height: 10px;
+
+            width: 100%;
+
+            background:
+                var(--border);
+
+            border-radius: 30px;
+
+            overflow: hidden;
+
+            margin-bottom: 12px;
+
+        }
+
+
+        .strength-fill {
+
+            width: 0%;
+
+            height: 100%;
+
+            border-radius: 30px;
+
+            background:
+                var(--primary);
+
+            transition: 0.3s;
+
+        }
+
+
+        .strength-status {
+
+            color: var(--muted);
+
+            font-size: 14px;
+
+        }
+
+
+        /* =====================================
+           STATS
+        ====================================== */
+
+        .stats {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    3,
+                    1fr
+                );
+
+            gap: 18px;
+
+            margin-top: 22px;
+/* SANDHU */
+        }
+
+
+        .stat {
+
+            padding: 22px;
+
+            background: var(--card);
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 18px;
+
+            box-shadow: var(--shadow);
+
+        }
+
+
+        .stat-icon {
+
+            font-size: 21px;
+
+            margin-bottom: 9px;
+
+        }
+
+
+        .stat h3 {
+
+            font-size: 24px;
+
+            margin-bottom: 5px;
+
+        }
+
+
+        .stat p {
+
+            color: var(--muted);
+
+            font-size: 13px;
+
+        }
+
+
+        /* =====================================
+           FOOTER
+        ====================================== */
+
+        footer {
+
+            padding:
+                25px
+                7%;
+
+            background: var(--card);
+
+            border-top:
+                1px solid var(--border);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content:
+                space-between;
+
+            color: var(--muted);
+
+            font-size: 13px;
+
+        }
+
+
+        footer strong {
+
+            color: var(--text);
+
+        }
+
+
+        .footer-right {
+
+            color:
+                var(--primary-dark);
+
+        }
+
+/* SANDHU */
+        /* =====================================
+           RESPONSIVE
+        ====================================== */
+
+        @media (max-width: 850px) {
+
+            .grid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+            .dashboard {
+
+                width: 92%;
+
+            }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            header {
+
+                padding:
+                    0
+                    20px;
+
+            }
+
+
+            .hero {
+
+                padding-top: 40px;
+
+            }
+
+
+            .card {
+
+                padding: 21px;
+
+            }
+
+
+            .options {
+
+                grid-template-columns:
+                    1fr;
+
+            }
+
+
+            .stats {
+
+                grid-template-columns:
+                    1fr;
+
+            }
+
+
+            footer {
+
+                flex-direction: column;
+
+                gap: 10px;
+
+                text-align: center;
+
+            }
+
+
+            .password-box input {
+
+                font-size: 13px;
+
+            }
+
+
+            .copy-btn {
+
+                padding:
+                    11px
+                    13px;
+
+            }
+/* SANDHU */
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================
+         HEADER
+    ====================================== -->
+
+    <header>
+
+        <div class="brand">
+
+            <div class="brand-logo">
+                🔐
+            </div>
+
+            <div class="brand-name">
+                PASS <span>FORGE</span>
+            </div>
+
+        </div>
+
+<!-- SANDHU -->
+        <button
+            class="theme-btn"
+            id="themeBtn"
+            onclick="toggleTheme()"
+            title="Change theme"
+        >
+            🌙
+        </button>
+
+    </header>
+
+
+    <!-- =====================================
+         HERO
+    ====================================== -->
+
+    <section class="hero">
+
+        <div class="badge">
+            🔒 Secure Password Generator
+        </div>
+
+
+        <h1>
+            Create
+            <span>Strong Passwords</span>
+            Instantly
+        </h1>
+
+
+        <p>
+            Generate secure and customizable passwords
+            according to your own requirements.
+            Choose the length, characters and style
+            you want.
+        </p>
+
+    </section>
+
+<!-- SANDHU -->
+    <!-- =====================================
+         DASHBOARD
+    ====================================== -->
+
+    <main class="dashboard">
+
+
+        <div class="grid">
+
+
+            <!-- =================================
+                 GENERATOR CARD
+            ================================== -->
+
+            <div class="card">
+
+                <div class="card-header">
+
+                    <h2>
+                        🎲 Password Generator
+                    </h2>
+
+                    <span>
+                        Customize yours
+                    </span>
+
+                </div>
+
+<!-- SANDHU -->
+                <!-- PASSWORD -->
+
+                <div class="password-box">
+
+                    <input
+                        type="text"
+                        id="password"
+                        value=""
+                        placeholder="Your password will appear here"
+                        readonly
+                    >
+
+
+                    <button
+                        class="copy-btn"
+                        onclick="copyPassword()"
+                    >
+                        📋 Copy
+                    </button>
+
+                </div>
+
+<!-- SANDHU -->
+                <!-- LENGTH -->
+
+                <div class="length-info">
+
+                    <span>
+                        Password Length
+                    </span>
+
+                    <span
+                        class="length-value"
+                        id="lengthValue"
+                    >
+                        16
+                    </span>
+
+                </div>
+
+
+                <input
+                    type="range"
+                    id="length"
+                    min="4"
+                    max="30"
+                    value="16"
+                    oninput="updateLength()"
+                >
+<!-- SANDHU -->
+
+                <!-- CUSTOMIZE -->
+
+                <div class="custom-title">
+
+                    <strong>
+                        🎛️ Customize Your Password
+                    </strong>
+
+                </div>
+
+
+                <div class="custom-subtitle">
+
+                    Select exactly what you want
+                    in your password.
+
+                </div>
+<!-- SANDHU -->
+
+                <div class="options">
+
+
+                    <label class="option">
+
+                        <input
+                            type="checkbox"
+                            id="uppercase"
+                            checked
+                        >
+
+                        ABC Uppercase
+
+                    </label>
+
+
+                    <label class="option">
+
+                        <input
+                            type="checkbox"
+                            id="lowercase"
+                            checked
+                        >
+
+                        abc Lowercase
+
+                    </label>
+
+
+                    <label class="option">
+
+                        <input
+                            type="checkbox"
+                            id="numbers"
+                            checked
+                        >
+
+                        123 Numbers
+
+                    </label>
+
+
+                    <label class="option">
+
+                        <input
+                            type="checkbox"
+                            id="symbols"
+                            checked
+                        >
+<!-- SANDHU -->
+                        !@# Symbols
+
+                    </label>
+
+
+                </div>
+
+
+                <!-- GENERATE -->
+
+                <button
+                    class="generate-btn"
+                    onclick="generatePassword()"
+                >
+
+                    ⚡ Generate Password
+
+                </button>
+
+            </div>
+
+
+            <!-- =================================
+                 STRENGTH CARD
+            ================================== -->
+
+            <div class="card strength-card">
+
+                <div class="shield">
+                    🛡️
+                </div>
+
+
+                <h2>
+                    Password Strength
+                </h2>
+
+
+                <p>
+                    Your password strength will
+                    automatically be checked after
+                    generation.
+                </p>
+
+<!-- SNADHU -->
+                <div class="strength-bar">
+
+                    <div
+                        class="strength-fill"
+                        id="strengthFill"
+                    >
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="strength-status"
+                    id="strengthStatus"
+                >
+                    Generate a password
+                    to check its strength.
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- =====================================
+             STATS
+        ====================================== -->
+
+        <div class="stats">
+
+
+            <div class="stat">
+
+                <div class="stat-icon">
+                    🔢
+                </div>
+
+                <h3 id="lengthStat">
+                    16
+                </h3>
+
+                <p>
+                    Password Characters
+                </p>
+
+            </div>
+<!-- SANDHU -->
+
+            <div class="stat">
+
+                <div class="stat-icon">
+                    🎛️
+                </div>
+
+                <h3>
+                    4–30
+                </h3>
+
+                <p>
+                    Custom Length
+                </p>
+
+            </div>
+
+
+            <div class="stat">
+
+    <div class="stat-icon">
+        🎯
+    </div>
+
+    <h3 id="generatedCount">
+        0
+    </h3>
+
+    <p>
+        Passwords Generated
+    </p>
+
+</div>
+<!-- SANDHU -->
+
+        </div>
+
+
+    </main>
+
+
+    <!-- =====================================
+         FOOTER
+    ====================================== -->
+
+    <footer>
+
+        <div>
+            © 2026
+            <strong>PASS FORGE</strong>
+        </div>
+
+        </div>
+
+    </footer>
+<!-- SANDHU -->
+
+    <!-- =====================================
+         JAVASCRIPT
+    ====================================== -->
+
+    <script>
+
+
+        /* =====================================
+           PASSWORD GENERATOR
+        ====================================== */
+
+generatePassword();
+loadStats();
+
+
+        async function generatePassword() {
+
+    const length = Number(
+        document.getElementById("length").value
+    );
+loadStats();
+    const uppercase =
+        document.getElementById("uppercase").checked;
+
+    const lowercase =
+        document.getElementById("lowercase").checked;
+
+    const numbers =
+        document.getElementById("numbers").checked;
+
+    const symbols =
+        document.getElementById("symbols").checked;
+
+
+    try {
+// SANDHU
+        const response = await fetch("/generate", {
+
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+
+                length: length,
+                uppercase: uppercase,
+                lowercase: lowercase,
+                numbers: numbers,
+                // SANDHU
+                symbols: symbols
+
+            })
+
+        });
+
+// SANDHU
+        const data = await response.json();
+
+
+        if (!data.success) {
+
+            alert(data.error);
+
+            return;
+
+        }
+
+
+        // Show password
+
+        document.getElementById(
+            "password"
+        ).value = data.password;
+
+
+        // Update password length
+
+        document.getElementById(
+            "lengthValue"
+        ).textContent = length;
+
+        document.getElementById(
+            "lengthStat"
+        ).textContent = length;
+
+// SANDHU
+        // Strength
+
+        const fill =
+            document.getElementById(
+                "strengthFill"
+            );
+
+        const status =
+            document.getElementById(
+                "strengthStatus"
+            );
+
+
+        fill.style.width =
+            data.percentage + "%";
+
+
+        if (data.strength === "Strong") {
+
+            fill.style.background =
+                "#22c55e";
+
+            status.textContent =
+                "🟢 Strong password";
+
+        }
+
+        else if (data.strength === "Medium") {
+
+            fill.style.background =
+                "#f59e0b";
+
+            status.textContent =
+                "🟡 Medium password";
+
+        }
+
+        else {
+
+            fill.style.background =
+                "#ef4444";
+
+            status.textContent =
+                "🔴 Weak password";
+
+        }
+
+    }
+// SANDHU
+
+    catch (error) {
+
+        console.error(error);
+
+        alert(
+            "Could not connect to Python server."
+        );
+
+    }
+            /* ---------------------------------
+               CHECK SELECTED OPTIONS
+            ---------------------------------- */
+
+            if (useUppercase) {
+
+                selectedCharacters +=
+                    uppercase;
+// SANDHU
+            }
+
+
+            if (useLowercase) {
+
+                selectedCharacters +=
+                    lowercase;
+
+            }
+
+
+            if (useNumbers) {
+
+                selectedCharacters +=
+                    numbers;
+
+            }
+
+
+            if (useSymbols) {
+
+                selectedCharacters +=
+                    symbols;
+
+            }
+// SANDHU
+
+            /* ---------------------------------
+               NO OPTION SELECTED
+            ---------------------------------- */
+
+            if (
+                selectedCharacters.length === 0
+            ) {
+
+                alert(
+                    "Please select at least one option."
+                );
+
+                return;
+
+            }
+
+
+            /* ---------------------------------
+               PASSWORD TOO SHORT
+            ---------------------------------- */
+
+            const selectedTypes = [
+
+                useUppercase,
+
+                useLowercase,
+
+                useNumbers,
+
+                useSymbols
+
+            ].filter(Boolean).length;
+
+
+            if (length < selectedTypes) {
+
+                alert(
+                    "Password length is too short for the selected options."
+                );
+
+                return;
+
+            }
+
+
+            /* ---------------------------------
+               GUARANTEE EACH SELECTED TYPE
+            ---------------------------------- */
+
+            if (useUppercase) {
+
+                passwordCharacters.push(
+                    randomCharacter(
+                        uppercase
+                    )
+                );
+
+            }
+
+
+            if (useLowercase) {
+
+                passwordCharacters.push(
+                    randomCharacter(
+                        lowercase
+                    )
+                );
+
+            }
+
+
+            if (useNumbers) {
+
+                passwordCharacters.push(
+                    randomCharacter(
+                        numbers
+                    )
+                );
+
+            }
+
+
+            if (useSymbols) {
+
+                passwordCharacters.push(
+                    randomCharacter(
+                        symbols
+                    )
+                );
+
+            }
+
+
+            /* ---------------------------------
+               FILL REMAINING CHARACTERS
+            ---------------------------------- */
+
+            while (
+                passwordCharacters.length <
+                length
+            ) {
+// SANDHU
+                passwordCharacters.push(
+                    randomCharacter(
+                        selectedCharacters
+                    )
+                );
+
+            }
+
+
+            /* ---------------------------------
+               SHUFFLE PASSWORD
+            ---------------------------------- */
+
+            passwordCharacters =
+                shuffle(
+                    passwordCharacters
+                );
+
+
+            const password =
+                passwordCharacters.join("");
+
+// SANDHU
+            /* ---------------------------------
+               SHOW PASSWORD
+            ---------------------------------- */
+
+            document.getElementById(
+                "password"
+            ).value = password;
+
+
+            document.getElementById(
+                "lengthStat"
+            ).textContent = length;
+
+
+            checkStrength(password);
+
+        }
+
+
+        /* =====================================
+           RANDOM CHARACTER
+        ====================================== */
+
+        function randomCharacter(characters) {
+
+            const randomIndex =
+                Math.floor(
+                    Math.random() *
+                    characters.length
+                );
+
+
+            return characters[randomIndex];
+
+        }
+
+
+        /* =====================================
+           SHUFFLE
+        ====================================== */
+
+        function shuffle(array) {
+
+            for (
+                let i = array.length - 1;
+                i > 0;
+                i--
+            ) {
+// SANDHU
+                const j =
+                    Math.floor(
+                        Math.random() *
+                        (i + 1)
+                    );
+
+
+                [
+                    array[i],
+                    array[j]
+                ] =
+                [
+                    array[j],
+                    array[i]
+                ];
+
+            }
+
+
+            return array;
+
+        }
+
+
+        /* =====================================
+           LENGTH UPDATE
+        ====================================== */
+
+        function updateLength() {
+
+            const length =
+                document.getElementById(
+                    "length"
+                ).value;
+
+
+            document.getElementById(
+                "lengthValue"
+            ).textContent = length;
+
+
+            document.getElementById(
+                "lengthStat"
+            ).textContent = length;
+
+        }
+
+// SANDHU
+        /* =====================================
+           COPY PASSWORD
+        ====================================== */
+
+        function copyPassword() {
+
+            const password =
+                document.getElementById(
+                    "password"
+                ).value;
+
+
+            if (!password) {
+
+                alert(
+                    "Generate a password first."
+                );
+
+                return;
+
+            }
+
+
+            navigator.clipboard
+                .writeText(password);
+
+
+            const button =
+                document.querySelector(
+                    ".copy-btn"
+                );
+
+
+            button.textContent =
+                "✓ Copied";
+
+
+            setTimeout(
+                function () {
+
+                    button.textContent =
+                        "📋 Copy";
+
+                },
+                1500
+            );
+
+        }
+
+
+        /* =====================================
+           PASSWORD STRENGTH
+        ====================================== */
+
+        function checkStrength(password) {
+
+
+            let score = 0;
+
+// SANDHU
+            /* Length */
+
+            if (password.length >= 8) {
+
+                score++;
+
+            }
+
+
+            if (password.length >= 12) {
+
+                score++;
+
+            }
+
+
+            if (password.length >= 16) {
+
+                score++;
+
+            }
+
+
+            /* Character types */
+
+            if (/[A-Z]/.test(password)) {
+
+                score++;
+
+            }
+
+
+            if (/[a-z]/.test(password)) {
+
+                score++;
+
+            }
+
+
+            if (/[0-9]/.test(password)) {
+
+                score++;
+
+            }
+// SANDHU
+
+            if (/[^A-Za-z0-9]/.test(password)) {
+
+                score++;
+
+            }
+
+
+            const fill =
+                document.getElementById(
+                    "strengthFill"
+                );
+
+
+            const status =
+                document.getElementById(
+                    "strengthStatus"
+                );
+
+
+            /* ---------------------------------
+               WEAK
+            ---------------------------------- */
+
+            if (score <= 2) {
+
+                fill.style.width = "30%";
+
+                fill.style.background =
+                    "#ef4444";
+
+                status.textContent =
+                    "🔴 Weak password";
+
+            }
+
+
+            /* ---------------------------------
+               MEDIUM
+            ---------------------------------- */
+
+            else if (score <= 4) {
+
+                fill.style.width = "60%";
+
+                fill.style.background =
+                    "#f59e0b";
+
+                status.textContent =
+                    "🟡 Medium password";
+
+            }
+// SANDHU
+
+            /* ---------------------------------
+               STRONG
+            ---------------------------------- */
+
+            else {
+
+                fill.style.width = "100%";
+
+                fill.style.background =
+                    "#22c55e";
+
+                status.textContent =
+                    "🟢 Strong password";
+
+            }
+
+        }
+
+
+        /* =====================================
+           DARK / LIGHT MODE
+        ====================================== */
+
+        function toggleTheme() {
+
+
+            document.body.classList.toggle(
+                "dark"
+            );
+
+
+            const button =
+                document.getElementById(
+                    "themeBtn"
+                );
+
+
+            const isDark =
+                document.body.classList.contains(
+                    "dark"
+                );
+
+// SANDHU
+            if (isDark) {
+
+                button.textContent = "☀️";
+
+                localStorage.setItem(
+                    "sandhuTheme",
+                    "dark"
+                );
+
+            }
+
+            else {
+
+                button.textContent = "🌙";
+
+                localStorage.setItem(
+                    "sandhuTheme",
+                    "light"
+                );
+
+            }
+
+        }
+
+
+        /* =====================================
+           REMEMBER THEME
+        ====================================== */
+
+        const savedTheme =
+            localStorage.getItem(
+                "sandhuTheme"
+            );
+
+
+        if (savedTheme === "dark") {
+
+            document.body.classList.add(
+                "dark"
+            );
+
+
+            document.getElementById(
+                "themeBtn"
+            ).textContent = "☀️";
+
+        }
+
+
+        /* =====================================
+           START WITH PASSWORD
+        ====================================== */
+
+        generatePassword();
+
+
+
+
+        async function loadStats() {
+
+    try {
+
+        const response = await fetch("/stats");
+
+        const data = await response.json();
+
+        document.getElementById(
+            "generatedCount"
+        ).textContent = data.total_generated;
+
+    }
+// SANDHU
+    catch (error) {
+
+        console.error(
+            "Could not load statistics:",
+            error
+        );
+
+    }
+
+}
+
+
+loadStats();
+
+    </script>
+<!-- SANDHU -->
+
+</body>
+
+</html>
+<!-- SANDHU ALL MADE WITH LOVE ANMOL SANDHU  -->
